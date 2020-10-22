@@ -1,0 +1,10 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <HTMLCodeStyleSettings>
+      <option name="HTML_DO_NOT_INDENT_CHILDREN_OF" value="thead,tbody,tfoot" />
+    </HTMLCodeStyleSettings>
+    <XML>
+      <option name="XML_SPACE_AROUND_EQUALITY_IN_ATTRIBUTE" value="true" />
+    </XML>
+  </code_scheme>
+</component>

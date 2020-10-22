@@ -1,0 +1,191 @@
+1.地址池配置文件获取错误：
+    原：InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("/druid.properties");
+    改：InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+
+    原：driverClassName=com.mysql.jdbc.Driver（maysql[5.0+,8.0-]）
+        url：jdbc:mysql://127.0.0.1:3306/travel_website
+    改：driverClassName=com.mysql.cj.jdbc.Driver（maysql8.0+）,allowMultiQueries=true是否允许多
+        url：jdbc:mysql://127.0.0.1:3306/travel_website?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT&allowMultiQueries=true&useSSL=false
+2.sql语法等：
+	注意SQL语句的拼写：
+	注意数据库的长度大小限制：org.springframework.dao.EmptyResultDataAccessException: Incorrect result size: expected 1, actual 0 为正常现象
+        //报错原因
+        public User findByUserName(String username) {
+            User user = null;
+            try {
+                //1.定义sql
+                sql = "select * from tab_user where username = ?";
+                //执行sql
+                //返回结构为0期待为1
+                user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username);
+            } catch (DataAccessException e) {
+                e.printStackTrace();
+            }
+            return user;
+        }
+3.jackson-annotations
+    报错：严重: Unable to process Jar entry [module-info.class] from Jar [jar:file:/F:/Development/apache-maven-3.6.3/respository/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar!/] for annotations
+       org.apache.tomcat.util.bcel.classfile.ClassFormatException: Invalid byte tag in constant pool: 19
+
+    版本：不能太高，要符合maven自带的tomcat7的支持
+    建议：maven(tomcat7)版本为2.9.10-/2.9.10+为独立使用tomcat8+
+4.redis：Set<Tuple> categorys = jedis.zrangeWithScores("category", 0, -1);
+    (1.从数据库查询获取数据，存入redis中
+        因为从数据库中获取到的数据存入redis中不需要考虑类型格式的转换
+        cs = dao.findAll();
+            //将集合数据存储到redis中的 category的key
+            for (Category c : cs) {
+                //存储
+                jedis.zadd("category", c.getCid(), c.getCname());
+            }
+    (2.将redis中的数据取出，存入集合中
+        因为从redis中获取到的数据为Tuple类型，需要转换格式才可以存入集合（getElement）
+        cs = new ArrayList<Category>();
+            for (Tuple tuple :categorys) {
+                Category category = new Category();
+                //将redis的数据转换成String类型存入Category中
+                category.setCname(tuple.getElement());
+                //存储
+                cs.add(category);
+            }
+    (3.报错
+        1.ava.lang.reflect.InvocationTargetException(调用目标异常)
+        	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        2.Caused by: redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool(无法从池中获取资源)
+        3.Caused by: redis.clients.jedis.exceptions.JedisConnectionException: Failed connecting to 127.0.0.1:6379(连接到127.0.0.1:6379失败)
+        4.Caused by: java.net.SocketTimeoutException: connect timed out(连接超时)
+        原因：没有启动redis服务器
+        解决：运行redis-server：redis-server.exe F:\Development\Redis\redis.windows.conf
+5.网页获取URL？后面的信息
+    $(function () {
+       var search = location.search;
+       //alert(search);//?id=5
+        // 切割字符串，拿到第二个值
+        var cid = search.split("=")[1];
+    });
+6.页码的长度
+    /*
+    1.-共展示10个页码，能够达到前5后4的效果
+    2.如果前边不够5个，后边补齐10个
+    3.如果后边不足4个，前边补齐10个
+    */
+    //定义开始位置begin,结束位置end
+    var begin;//开始位置
+    var end; //结束位置
+    //1.2.1要显示10个页码
+    if(data.totalPage < 10){
+        //总页不够10页
+        begin = 1;
+        end = data.totalPage;
+    }else{
+        //总页超过10页
+        begin = data.currentPage-5;
+        end = data.currentPage+5;
+        //如果前边不够5个，后边补齐10个
+        if(begin < 1){
+            begin = 1;
+            end = begin + 10;
+        }
+        //如果后边不足4个，前边补齐10个
+        if (end > data.totalPage){
+            end = data.totalPage;
+            begin = end -10;
+        }
+    }
+7.页面滚动
+    //每次点击超链接调用该方法结束都会滚动到指定坐标
+    window.scrollTo(0,0);
+8.//根据传递过来的参数name获取对应的值
+  function getParameter(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+      /**
+       * ^n的用法:匹配任何开头为n的字符串
+       *     "(^|&)"+name 的含义: 匹配以&name开头 或者 空白name 开头的字符串
+       *         (其实|前面有空白也就是什么都没有,也就是通配url中第一个参数或第二个参数的情况)
+       *
+       *     [^abc]的用法 : 匹配除了abc以外的其他字符
+       *     [^&]的含义 : 匹配除了&以外的任意字符 (也很好理解,因为一旦出现&说明是另一个参数了,所以不能匹配了)
+       *     [^&]*的含义 : 匹配任意数量的 除了&以外的字符 (也就是说name=后面的值一旦有&则就不向后取值了)
+       *
+       *     n$的用法 : 匹配任何结尾为 n 的字符串
+       *     (&|$)的含义 : 匹配任何以&结尾 或者 以空白结尾的参数 (也就是说匹配了该参数在中间或者最后一个参数的情况)
+       *     ([^&]*)(&|$)的含义 : 匹配 &之外的以任意多个 参数值,一旦遇到&或者空白就中止
+       *         (遇到&说明到下一个参数了,也就是该参数在中间的情况,遇到空白说明没有值了,也就是该参数为最后一个参数)
+       *
+       *     整个"(^|&)" + name + "=([^&]*)(&|$)的含义 :
+       *         匹配以 &name=开头 或者 name=开头 中间为任意多个除了&以外的字符 一旦遇到&或者空白就中止取值
+       *         第二个参数:
+       *             i : 执行对大小写不敏感的匹配 (也就是说 我们要的参数 state 可以匹配 state 或者 STATE 或者 StAtE 等等吧 就是对大小写不敏感)
+       *             g : 执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）
+       *             m : 执行多行匹配
+       *     补充 : 创建一个RegExp对象: new RegExp(pattern,attributes);
+       *     如果使用new关键字 则会创建一个RegExp对象,如果不使用new关键字则不会创建RegExp对象(直接当做一个正则字符串使用)
+       *     ECMAScript 标准化之前，不支持 m 属性。如果 pattern 是正则表达式，而不是字符串，则必须省略该参数。
+       */
+      var r = location.search.substr(1).match(reg);
+      if (r!=null) return (r[2]); return null;
+  }
+9.tomcat7 GET请求乱码
+    解决：
+        //接收rname 线路名称
+        String rname = request.getParameter("rname");
+        //对get请求获取的数据重新编码
+        rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
+10.部署到linux
+    pom.xml：
+        //jdk版本需与linux的jdk版本一样
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <encoding>utf-8</encoding>
+        </configuration>
+
+        //在<build>下设置打包后的包名，防止包名带版本号，导致最后范文时要输入带版本号的访问路径
+            <!--打包后的包名-->
+            <finalName>travel</finalName>
+    druid.properties：
+        源mysql5.0：url=jdbc:mysql://127.0.0.1:3306/travel_website
+        //传输的编码为utf-8
+        改：url=jdbc:mysql://127.0.0.1:3306/travel_website?characterEncoding=utf8
+
+    绝对路径换相对路径：
+        //绝对路径只能本机访问，部署到linux后要让别人访问，所以要用相对路径
+        header.html：
+            源：location.href = "http://localhost:81/travel/route_list.html?cid="+parameter+"&rname=" + rname;
+                //相对路径
+            改：location.href = "route_list.html?cid="+parameter+"&rname=" + rname;
+        route_detail.html：
+            源：location.href = "http://localhost:81/travel/login.html";
+                            //相对路径
+            改：location.href = "/login.html";
+11.运行tomcat7：run报错：
+    错误信息：
+        Some problems were encountered while building the effective model for com.xiaozheng:XX_16_travel:war:1.0-SNAPSHOT
+        'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 128, column 21
+        It is highly recommended to fix these problems because they threaten the stability of your build.
+        For this reason, future Maven versions might no longer support building such malformed projects.
+    解决：官方文档：http://maven.apache.org/plugins/maven-compiler-plugin/usage.html
+          <build>
+            <pluginManagement>
+              <plugins>
+                <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  //没加<version>3.8.1</version>加上解决
+                  <version>3.8.1</version>
+                  <configuration>
+                    <!-- put your configurations here -->
+                  </configuration>
+                </plugin>
+              </plugins>
+            </pluginManagement>
+          </build>
+    错误信息：
+        Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+    解决：
+        在pom.xml中加入下面代码即可
+            <properties>
+                    <project.build.sourceEncoding>
+                        UTF-8
+                    </project.build.sourceEncoding>
+             </properties>

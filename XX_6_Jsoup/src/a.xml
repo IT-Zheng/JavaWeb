@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK" ?><!--文档声明-->
+<!--version:版本号  encoding:编码格式，默认为ISO-8851  standalone:是否独立-->
+<?xml-stylesheet type = "text/css" href = "a.css" ?><!-- 指令：结合CSS-->
+<users>
+    <user>
+        <name>lisi</name>
+        <age>20</age>
+        <gender>nan</gender>
+    </user>
+    <user>
+        <name>zhangsan</name>
+        <age>20</age>
+        <gender>nan</gender>
+        <code>
+            <!--if( a < b && a > c ){} &lt;!&ndash; 无法显示符号需要用转字符代替 &ndash;&gt;-->
+            if(a &lt; b &amp;&amp; a &gt; c){}<!-- 转义字符 -->
+            <![CDATA[
+                f( a < b && a > c ){}
+            ]]><!-- CDATA区的内容会原封不动显示出来 -->
+        </code>
+    </user>
+</users>

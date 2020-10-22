@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+
+    <style>
+        table{
+            border: 1px solid;
+            margin: auto;
+            width: 500px;
+        }
+
+        td,th{
+            text-align: center;
+            border: 1px solid;
+        }
+        div{
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
+
+</head>
+    <body>
+        <div>
+            <input type="text" id="id" placeholder="请输入编号">
+            <input type="text" id="name"  placeholder="请输入姓名">
+            <input type="text" id="gender"  placeholder="请输入性别">
+            <input type="button" value="添加" id="btn_add">
+
+        </div>
+
+        <table id="ta">
+            <caption>学生信息表</caption>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+        </table>
+        <script>
+            //获取按钮
+            document.getElementById("btn_add").onclick = function () {
+                //获取文本框的内容
+                var id = document.getElementById("id").value;
+                var name = document.getElementById("name").value;
+                var gender = document.getElementById("gender").value;
+                //创建td，赋值td的标签体
+                //id 的td
+                var td_id = document.createElement("td");//创建td标签
+                var text_id = document.createTextNode(id);//创建一个文本节点，内容为id的值
+                td_id.appendChild(text_id);//把文本节点放到td标签中
+                //name的td
+                var td_name = document.createElement("td");
+                var text_name = document.createTextNode(name);
+                td_name.appendChild(text_name);
+                //gender的td
+                var td_gender = document.createElement("td");
+                var text_gender = document.createTextNode(gender);
+                td_gender.appendChild(text_gender);
+                //a的td
+                var td_a = document.createElement("td");//创建td标签
+                var ele_a = document.createElement("a");//创建a标签
+                ele_a.setAttribute("href","javascript:void(0);");//给a标签设置href属性
+                ele_a.setAttribute("onclick","delTr(this);");//给a标签设置onclick属性
+                var text_a = document.createTextNode("删除");//创建一个文本节点，内容为“删除”
+                ele_a.appendChild(text_a);//在a标签后面添加文本节点
+                td_a.appendChild(ele_a);//把a标签放到td标签中
+                //创建tr
+                var tr = document.createElement("tr");
+                //添加td到tr中
+                tr.appendChild(td_id);
+                tr.appendChild(td_name);
+                tr.appendChild(td_gender);
+                tr.appendChild(td_a);
+                //获取table
+                var table = document.getElementsByTagName("table")[0];
+                table.appendChild(tr);//在table标签内的后面添加tr标签
+            }
+            //删除当前tr标签
+            function delTr(re) {
+                //         a  →    td    →    tr    →   table
+                var table = re.parentNode.parentNode.parentNode;
+                var tr = re.parentNode.parentNode;
+                table.removeChild(tr);
+            }
+        </script>
+    </body>
+</html>

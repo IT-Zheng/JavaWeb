@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--<!DOCTYPE students SYSTEM "student.dtd">&lt;!&ndash; 引入.dtd文件约束，其中students为跟标签 &ndash;&gt;-->
+<!--		网络: <!DOCTYPE 根标签名PUBLIC  "dtd文件名字" "dtd文件的位置URL">-->
+<!DOCTYPE students [
+		<!-- 内部约束 -->
+		<!ELEMENT students (student*) >
+		<!ELEMENT student (name,age,sex)>
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT age (#PCDATA)>
+		<!ELEMENT sex (#PCDATA)>
+		<!ATTLIST student number ID #REQUIRED>
+
+		]>
+<students>
+	<student number="itcast_0001">
+		<name>tom</name>
+		<age>18</age>
+		<sex>male</sex>
+	</student>
+	
+</students>

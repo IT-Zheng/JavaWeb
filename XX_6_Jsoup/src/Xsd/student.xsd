@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.itcast.cn/xml"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.itcast.cn/xml" elementFormDefault="qualified"><!-- 根标签 -->
+    <xsd:element name="students" type="studentsType"/><!-- 定义了一个students元素  类型为studentsType（自定义）-->
+    <xsd:complexType name="studentsType"><!-- 声明了一个类型为studentsTypeE的组合类型 -->
+        <xsd:sequence><!-- 声明了sequence 表示了按顺序出现student元素 -->
+            <xsd:element name="student" type="studentType" minOccurs="0" maxOccurs="unbounded"/>
+            <!-- 定义了一个student元素 类型为studentType 最小出现：0次 最多出现：unbounded次（无限）-->
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="studentType"><!-- 声明了一个类型为studentType的组合类型 -->
+        <xsd:sequence><!-- 声明了sequence 表示了按顺序出现student元素 -->
+            <xsd:element name="name" type="xsd:string"/><!-- 定义了一个name元素 类型为string 最多出现：1次-->
+            <xsd:element name="age" type="ageType" /><!-- 定义了一个age元素 类型为ageType 最多出现：1次-->
+            <xsd:element name="sex" type="sexType" /><!-- 定义了一个sex元素 类型为sexType 最多出现：1次-->
+        </xsd:sequence>
+        <xsd:attribute name="number" type="numberType" use="required"/>
+        <!-- 定义了一个属性为number  类型为numberType  use：可选的和必须的属性，required：必须的-->
+    </xsd:complexType>
+    <xsd:simpleType name="sexType"><!-- 定义了一个sexType元素  类型为简单类型-->
+        <xsd:restriction base="xsd:string"><!-- 限制类型为基本类型string-->
+            <!-- 如需把 XML 元素的内容限制为一组可接受的值，我们要使用枚举约束 -->
+            <xsd:enumeration value="male"/><!-- 设置了一个枚举值为male -->
+            <xsd:enumeration value="female"/><!-- 设置了一个枚举值为female -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="ageType"><!-- 定义了一个ageType元素  类型为简单类型-->
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/><!-- 设置了一个最小值为0 -->
+            <xsd:maxInclusive value="256"/><!-- 设置了一最大值为256 -->
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="numberType"><!-- 定义了一个numberType元素  类型为简单类型-->
+        <xsd:restriction base="xsd:string">
+            <!-- 内容限制定义为一系列可使用的数字或字母，我们要使用模式约束 -->
+            <xsd:pattern value="heima_\d{4}"/><!-- 以heima_开通后跟四位数字 -->
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema> 

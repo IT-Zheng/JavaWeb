@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>自定义js框架</title>
+        <!--<script src="../js/customize.js" ></script>-->
+        <script src="../js/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+        <div id="xiaozheng">小政</div>
+        <div id="zhangsan">张三</div>
+        <script>
+            //通过js方式获取名称叫div的所有HTML元素对象
+            var divs = document.getElementsByTagName("div");
+            alert(divs.length);//可以当做数组来使用
+            //通过JQ方式获取名称叫div的所有HTML元素对象
+            /*for (var i = 0 ; i < divs.length;i++){
+                divs[i].innerHTML = "aaa";
+            }*/
+            $(divs).html("ccc");//js->jq
+            var $divs = $("div");//也可以当做数组来使用
+            alert($divs.length);
+            //$divs.html("bbb");
+            $divs[0].innerHTML = "ccc";//jq->js
+        </script>
+    </body>
+</html>

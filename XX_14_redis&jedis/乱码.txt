@@ -1,0 +1,30 @@
+idea启动Tomcat中文乱码问题收集汇总
+简单方法:
+去Tomcat安装目录下 的conf文件夹.如:D:\developer_tools\apache-tomcat-8.5.37\conf;找到logging.properties文件,修改java.util.logging.ConsoleHandler.encoding =utf-8为  java.util.logging.ConsoleHandler.encoding = GBK;
+这种方法不是主流的,但优点是在idea控制台和dos命令窗口启动时都可避免中文乱码;
+
+缺点是idea上Run/Debug Configurations-->VM options:设置为-Dfile.encoding=UTF-8时 sout输出中文会出现乱码;且idea启动Tomcat时控制台的 Tomcat catalina log页面 还是中文乱码;
+===============================================================
+以下是常用方法:
+步骤:
+1.首先是编辑器的乱码，这个很好解决，file->settings->appearence里面有个Use custom font设置成支持中文的字体的 --> 微软雅黑就可以(这个很重要)
+
+同样还要再settings中的Eidtor->File Encodings里面设置字体编码格式，一般都是UTF-8，GBK什么的也行。
+
+2.找到idea安装目录bin目录下如下图所示两个文件，用编辑器打开，在文件末尾添加 -Dfile.encoding=UTF-8 ，然后重启idea，再打开流程图就会发现中文已经可以正常显示了。
+
+3.最后就是所有配置都没问题，但是仍然输出乱码，这个时候只有两种解释：
+一:IDEA把你的字体编码弄错了，但是在哪里弄错的呢。在web项目的目录下有个.idea的文件夹，这个文件夹里有个encodings.xml的文件
+里面记录了你某些文件对应的特殊编码，为什么会有这种编码呢，因为之前我无意中点了右下角的编码，改了一下，就被idea记录到 encodings.xml中，当你再次访问的时候，它就会用那种编码。只要把encodings.xml里面的除了UTF-8的都删了就好啦（我的所有字体都是UTF-8
+
+
+
+二:也有可能是c盘下的C:\Users\你自己的用户名(梁田)\.IntelliJIdea2019.1\config配置下还有一个idea64.exe.vmoptions文件，idea是以这个配置为准的，你idea安装目录下的改了没用，被这个覆盖了，所以起不了作用;
+ps:我的就是这个原因,解决了Tomcat启动时控制台的乱码问题. 但如果的电脑用户名是中文的话 用户名任然是乱码 #????
+
+此方法的优缺点和上面的相反 看个人的取舍了;
+================================================================
+懒  无图!
+可以去看下面博主的文章-->有图
+原文链接：https://blog.csdn.net/m0_37893932/article/details/78280663
+欢迎补充说明!

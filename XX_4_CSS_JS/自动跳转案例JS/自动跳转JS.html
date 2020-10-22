@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动跳转</title>
+    <style>
+        p{
+            text-align: center;
+        }
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <p><span id="time">5</span>秒之后，跳转百度首页...</p>
+    <script>
+        //设置倒计时数
+        var second = 5;
+        //获取标记id
+        var time =  document.getElementById("time");
+        //倒计时方法
+        function showTime() {
+            if (second <= 0){
+                //跳转百度
+                location.href="https://www.baidu.com";
+            }else{
+                //没运行一次 倒计时数-1
+                second --;
+                time.innerHTML = second+"";//在页面输出second的值
+            }
+        }
+        //没一秒运行1次
+        setInterval(showTime,1000);//开启倒计时，参数为showTime方法，1000为一秒。
+    </script>
+</body>
+</html>

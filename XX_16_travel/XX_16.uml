@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>cn.xiaozheng.travel.domain.Category</OriginalElement>
+  <nodes>
+    <node x="1720.4837962962963" y="359.5">cn.xiaozheng.travel.domain.Category</node>
+    <node x="728.4837962962963" y="360.0">cn.xiaozheng.travel.domain.Favorite</node>
+    <node x="1911.4837962962963" y="222.0">cn.xiaozheng.travel.domain.Route</node>
+    <node x="965.4837962962963" y="279.5">cn.xiaozheng.travel.domain.User</node>
+    <node x="2446.4837962962965" y="348.5">cn.xiaozheng.travel.domain.Seller</node>
+    <node x="0.0" y="2435.0">cn.xiaozheng.travel.util.JedisUtil</node>
+    <node x="1100.0" y="1922.0">cn.xiaozheng.travel.service.UserService</node>
+    <node x="2486.0" y="1922.0">cn.xiaozheng.travel.util.MailUtils</node>
+    <node x="0.0" y="2014.0">javax.servlet.Filter</node>
+    <node x="807.0" y="1408.5">cn.xiaozheng.travel.web.servlet.BaseServlet</node>
+    <node x="1573.0" y="1922.0">cn.xiaozheng.travel.service.CategoryService</node>
+    <node x="1325.0" y="1922.0">cn.xiaozheng.travel.dao.CategoryDao</node>
+    <node x="2128.0" y="1922.0">cn.xiaozheng.travel.util.JDBCUtils</node>
+    <node x="173.7986111111111" y="11.5">javax.servlet.ServletConfig</node>
+    <node x="333.9837962962963" y="700.0">javax.servlet.http.HttpServlet</node>
+    <node x="460.7986111111111" y="0.0">javax.servlet.Servlet</node>
+    <node x="207.0" y="2435.0">cn.xiaozheng.travel.util.UuidUtil</node>
+    <node x="0.0" y="1714.0">cn.xiaozheng.travel.web.servlet.CheckCodeServlet</node>
+    <node x="172.25" y="2261.0">cn.xiaozheng.travel.web.filter.CharchaterFilter</node>
+    <node x="714.0" y="2123.0">cn.xiaozheng.travel.dao.impl.UserDaoImpl</node>
+    <node x="810.0" y="1713.5">cn.xiaozheng.travel.web.servlet.CategoryServlet</node>
+    <node x="1612.375" y="59.0">java.io.Serializable</node>
+    <node x="388.75" y="1340.0">javax.servlet.annotation.WebServlet</node>
+    <node x="1560.0" y="2031.0">cn.xiaozheng.travel.service.impl.CategoryServiceImpl</node>
+    <node x="413.0" y="1922.0">javax.servlet.annotation.WebFilter</node>
+    <node x="1462.4837962962963" y="348.5">cn.xiaozheng.travel.domain.RouteImg</node>
+    <node x="388.4837962962963" y="232.5">javax.servlet.GenericServlet</node>
+    <node x="1325.0" y="2031.0">cn.xiaozheng.travel.dao.impl.CategoryDaoImpl</node>
+    <node x="395.0" y="1656.0">cn.xiaozheng.travel.web.servlet.UserServlet</node>
+    <node x="1099.0" y="2077.0">cn.xiaozheng.travel.service.impl.UserServiceImpl</node>
+    <node x="714.0" y="1922.0">cn.xiaozheng.travel.dao.UserDao</node>
+    <node x="1821.0" y="1922.0">cn.xiaozheng.travel.util.Md5Util</node>
+    <node x="2699.4837962962965" y="337.0">cn.xiaozheng.travel.domain.ResultInfo</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cn.xiaozheng.travel.web.servlet.BaseServlet" target="javax.servlet.http.HttpServlet">
+      <point x="0.0" y="-64.5" />
+      <point x="994.5" y="1315.0" />
+      <point x="655.7337962962963" y="1315.0" />
+      <point x="107.25" y="295.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.filter.CharchaterFilter" target="javax.servlet.Filter">
+      <point x="-98.25" y="-64.5" />
+      <point x="270.5" y="2236.0" />
+      <point x="196.5" y="2236.0" />
+      <point x="0.0" y="52.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.CheckCodeServlet" target="javax.servlet.http.HttpServlet">
+      <point x="-93.75" y="-52.5" />
+      <point x="93.75" y="1315.0" />
+      <point x="441.2337962962963" y="1315.0" />
+      <point x="-107.25" y="295.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.UserServlet" target="cn.xiaozheng.travel.web.servlet.BaseServlet">
+      <point x="98.75" y="-110.5" />
+      <point x="691.25" y="1636.0" />
+      <point x="900.75" y="1636.0" />
+      <point x="-93.75" y="64.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.service.impl.CategoryServiceImpl" target="cn.xiaozheng.travel.service.CategoryService">
+      <point x="0.0" y="-41.5" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.User" target="java.io.Serializable">
+      <point x="0.0" y="-156.5" />
+      <point x="1203.9837962962963" y="192.0" />
+      <point x="1660.5" y="192.0" />
+      <point x="-28.875" y="17.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.CategoryServlet" target="cn.xiaozheng.travel.web.servlet.BaseServlet">
+      <point x="92.75" y="-53.0" />
+      <point x="93.75" y="64.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.CheckCodeServlet" target="javax.servlet.annotation.WebServlet">
+      <point x="93.75" y="-52.5" />
+      <point x="281.25" y="1636.0" />
+      <point x="423.75" y="1636.0" />
+      <point x="-70.0" y="133.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.ResultInfo" target="java.io.Serializable">
+      <point x="0.0" y="-99.0" />
+      <point x="2826.4837962962965" y="172.0" />
+      <point x="1756.75" y="172.0" />
+      <point x="67.375" y="17.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.dao.impl.CategoryDaoImpl" target="cn.xiaozheng.travel.dao.CategoryDao">
+      <point x="0.0" y="-53.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.service.impl.UserServiceImpl" target="cn.xiaozheng.travel.service.UserService">
+      <point x="0.0" y="-64.5" />
+      <point x="0.0" y="52.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.Seller" target="java.io.Serializable">
+      <point x="0.0" y="-87.5" />
+      <point x="2562.9837962962965" y="182.0" />
+      <point x="1737.5" y="182.0" />
+      <point x="48.125" y="17.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="javax.servlet.Servlet">
+      <point x="0.0" y="-203.5" />
+      <point x="548.4837962962963" y="202.0" />
+      <point x="620.7986111111111" y="202.0" />
+      <point x="0.0" y="76.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.UserServlet" target="javax.servlet.annotation.WebServlet">
+      <point x="-98.75" y="-110.5" />
+      <point x="0.0" y="133.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="javax.servlet.ServletConfig">
+      <point x="-106.66666666666669" y="-203.5" />
+      <point x="441.81712962962956" y="202.0" />
+      <point x="307.2986111111111" y="202.0" />
+      <point x="0.0" y="64.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.dao.impl.UserDaoImpl" target="cn.xiaozheng.travel.dao.UserDao">
+      <point x="0.0" y="-99.0" />
+      <point x="0.0" y="75.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.Category" target="java.io.Serializable">
+      <point x="0.0" y="-76.5" />
+      <point x="1805.9837962962963" y="202.0" />
+      <point x="1699.0" y="202.0" />
+      <point x="9.625" y="17.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.filter.CharchaterFilter" target="javax.servlet.annotation.WebFilter">
+      <point x="98.25" y="-64.5" />
+      <point x="467.0" y="2236.0" />
+      <point x="541.0" y="2236.0" />
+      <point x="0.0" y="144.5" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.Route" target="java.io.Serializable">
+      <point x="0.0" y="-214.0" />
+      <point x="2168.9837962962965" y="192.0" />
+      <point x="1718.25" y="192.0" />
+      <point x="28.875" y="17.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.web.servlet.CategoryServlet" target="javax.servlet.annotation.WebServlet">
+      <point x="-92.75" y="-53.0" />
+      <point x="902.75" y="1626.0" />
+      <point x="563.75" y="1626.0" />
+      <point x="70.0" y="133.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.Favorite" target="java.io.Serializable">
+      <point x="0.0" y="-76.0" />
+      <point x="836.9837962962963" y="182.0" />
+      <point x="1641.25" y="182.0" />
+      <point x="-48.125" y="17.0" />
+    </edge>
+    <edge source="cn.xiaozheng.travel.domain.RouteImg" target="java.io.Serializable">
+      <point x="0.0" y="-87.5" />
+      <point x="1581.4837962962963" y="202.0" />
+      <point x="1679.75" y="202.0" />
+      <point x="-9.625" y="17.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="java.io.Serializable">
+      <point x="106.66666666666663" y="-203.5" />
+      <point x="655.1504629629629" y="172.0" />
+      <point x="1622.0" y="172.0" />
+      <point x="-67.375" y="17.0" />
+    </edge>
+    <edge source="javax.servlet.http.HttpServlet" target="javax.servlet.GenericServlet">
+      <point x="0.0" y="-295.0" />
+      <point x="0.0" y="203.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000004" x="1397.0" y="444.9999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>字段</Category>
+    <Category>构造函数</Category>
+    <Category>方法</Category>
+    <Category>属性</Category>
+    <Category>内部类</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

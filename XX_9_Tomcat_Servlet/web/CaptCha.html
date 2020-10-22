@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>随机验证码</title>
+        <script>
+            /*
+            点击超链接或图片换一张
+            1.超链接和图片绑定单击事件
+            2.重新设置图片的src属性值
+            */
+            window.onload=function (){
+                //1.获取图片对象
+                var img = document.getElementById("im");
+                //2.绑定事件
+                img.onclick = function () {
+                    //加时间戳
+                    var date = new Date().getTime();
+                    img.src = "/XX_9_Tomcat_Servlet_war_exploded/CheckCodeServlet?" + date;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <img id="im" src="/XX_9_Tomcat_Servlet_war_exploded/CheckCodeServlet">
+        <a id="a" href="" >看不清换一张？</a>
+    </body>
+</html>
